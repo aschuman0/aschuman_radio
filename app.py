@@ -1,5 +1,6 @@
 from flask import Flask, render_template, abort
 from utils.show_utils import get_shows, get_show_from_slug
+from utils.stream_utils import get_live_info
 
 # init app and configs
 app = Flask(__name__, static_url_path='')
@@ -9,6 +10,10 @@ shows = get_shows()
 # routes
 @app.route('/', methods=['GET'])
 def index():
+    if get_live_info():
+        live_info = get_live_info()
+        return render_template('live.html', live_info=live_info)
+
     return render_template('index.html')
 
 

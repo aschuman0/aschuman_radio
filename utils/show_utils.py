@@ -68,7 +68,7 @@ def get_show_from_slug(shows, slug):
     for show in shows:
         if show.slug == 'slug':
             return show
-        
+
     return None
 
 
