@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block type %}archive{% endblock %}
+{% block content %}
+{{ super() }}
+{% for show in shows %}
+<a href="{{ url_for('show_listing') + '/' + show.slug }}"><h2>{{ show.title }}</h2></a>
+<p>{{ show.show_date.strftime('%B %d, %Y') }} - {{ show.description }}</p>
+<hr />
+{% endfor %}
+{% endblock %}

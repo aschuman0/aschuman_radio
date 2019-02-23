@@ -1,0 +1,31 @@
+{% import "nav.html" as nav %}
+<! DOCTYPE html>
+<html>
+    <head>
+    {% block head %}
+        <meta charset="utf-8" />
+        <link href="https://fonts.googleapis.com/css?family=Jura" rel="stylesheet">
+        <link href="/css/main.css" rel="stylesheet">
+        <title>{% block title %}shadow journal radio{% endblock %}</title>
+    {% endblock %}
+    </head>
+    <body>
+    {% block body %}
+    <div id="header">
+    {% block header %}
+    {% endblock %}
+    </div>
+    <div id="content">
+    {% block content %}
+    <h1>shadow journal radio {% block type %}{% endblock %}</h1>
+    {{ nav }}
+    {% endblock %}
+    </div>
+    <div id="footer">
+    {% block footer %}
+    {% endblock %}
+    {% endblock %}
+        {% block scripts %}
+        {% endblock %}
+    </body>
+</html>

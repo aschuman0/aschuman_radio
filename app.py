@@ -12,21 +12,30 @@ shows = get_shows()
 def index():
     if get_live_info():
         live_info = get_live_info()
-        return render_template('live.html', live_info=live_info)
+        return render_template(
+            'live.html',
+            live_info=live_info,
+            show=shows[0].to_dict()
+            )
 
-    return render_template('index.html')
+    return render_template('index.html', shows=shows)
 
 
 @app.route('/shows', methods=['GET'])
 def show_listing():
-    return render_template('show_listing.html')
+    return render_template(
+        'show_listing.html',
+        shows=[show.to_dict() for show in shows]
+        )
 
 
 @app.route('/shows/<slug>', methods=['GET'])
 def show(slug):
-    show = get_show_from_slug(slug)
+    show = get_show_from_slug(shows=shows, slug=slug)
     if show:
-        return render_template('show.html', show=show.to_dict())
+        return render_template(
+            'show.html', show=show.to_dict()
+            )
     else:
         abort(404)
 
@@ -39,13 +48,13 @@ def about():
 # error handlers
 @app.errorhandler(404)
 def not_found(error):
-    error = 'Page Not Found'
+    error = 'page not found'
     return render_template('error.html', error=error)
 
 
 @app.errorhandler(500)
 def server_error(error):
-    error = 'Server Error'
+    error = 'server Error'
     return render_template('error.html', error=error)
 
 

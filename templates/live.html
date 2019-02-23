@@ -1,6 +1,29 @@
-<html>
-<title>Oh, okay</title>
-<body>
-{{ live_info }}
-</body>
-</html>
+{% extends "base.html" %}
+{% import "nav.html" as nav %}
+{% block content %}
+{{ super() }}
+<h2>we are live!</h2>
+<!-- this needs to be replaced with live updating js -->
+<!--<p><img src="{{ live_info.art_url }}" height="85" width="85"/><br />Now Playing:<br /><strong>{{ live_info.title }}</strong> - {{ live_info.artist }} - {{ live_info.album }}</p> -->
+<audio controls src="{{ live_info.stream_url }}" type="audio/mp3">
+    Your browser does not support the audio element. Please update.
+</audio>
+<h3>tonight's show</h3>
+<p>{{ show.description }}</p>
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Artist</th>
+        <th>Album</th>
+        <th>Genre</th>
+    </tr>
+    {% for song in show.playlist %}
+    <tr>
+        <td>{{ song.name }}</td>
+        <td>{{ song.artist }}</td>
+        <td>{{ song.album }}</td>
+        <td>{{ song.genre }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

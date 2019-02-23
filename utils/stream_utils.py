@@ -40,7 +40,8 @@ def get_live_info():
                 'artist': stream_status[1],
                 'album': stream_status[2],
                 'art_url': ART_URL,
-                'stream_url': STREAM_URL
+                'stream_url': STREAM_URL,
+                'info_url': STATS_URL
             }
 
             return live_info

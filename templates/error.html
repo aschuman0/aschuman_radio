@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block type %}regrets{% endblock %}
+{% block content %}
+<h1>something went wrong</h1>
+<p>{{ error }}</p>
+<a href="{{ url_for('index') }}">return</a>
+{% endblock %}

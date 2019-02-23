@@ -1,0 +1,45 @@
+body {
+    background-color: black;
+    background-image: url("../bgs/1.jpg");
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-attachment: fixed;
+    object-fit: cover;
+    font-family: 'Jura', sans-serif;
+}
+a {
+    color: black;
+    text-decoration: none;
+}
+a:hover {
+    color: darkgreen;
+    text-decoration: underline;
+}
+table {
+    text-align: left;
+}
+
+td, th {
+    text-align: left;
+    padding-right: 1.5em;
+    padding-bottom: .5em;
+    width: 25%;
+}
+th {
+    border-bottom: 1px solid black;
+}
+#content {
+    background-color: lightgrey;
+    opacity: 0.9;
+    position: relative;
+    margin: auto;
+    margin-top: 3rem;
+    width: 70%;
+    min-height: 65%;
+    padding: 3rem;
+    border-radius: 5px;
+}
+hr {
+    border-top: 1px solid darkgrey;
+    border-radius: 1px;
+}
