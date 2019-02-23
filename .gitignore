@@ -13,7 +13,6 @@ _mailinglist
 .tox/
 .cache/
 .pytest_cache/
-.idea/
 docs/_build/
 
 # Coverage reports
@@ -27,3 +26,7 @@ htmlcov/
 appengine_config.py
 *.yaml
 .gcloudignore
+
+# IDE things
+.vscode/
+.idea/
