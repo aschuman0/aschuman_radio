@@ -11,7 +11,7 @@ SERVER_PORT = '8000'
 STREAM_ID = '2'
 STATS_ENDPOINT = '/statistics?json=1'
 ART_ENDPOINT = '/playingart?sid=' + STREAM_ID
-STREAM_ENDPOINT = '/listen.pls?sid=' + STREAM_ID
+STREAM_ENDPOINT = '/;?type=http&sid=' + STREAM_ID
 
 
 ENDPOINT_TEMPLATE = 'http://{ip}:{port}{endpoint}'
@@ -27,26 +27,36 @@ STREAM_URL = ENDPOINT_TEMPLATE.format(ip=SERVER_IP,
 
 
 def get_live_info():
-    stream_status = False
-
     try:
         stats = requests.get(STATS_URL)
         stats_dict = json.loads(stats.text)
-        
+
         if stats_dict['streams'][int(STREAM_ID)-1]['streamstatus'] == 1:
             stream_status = stats_dict['streams'][int(STREAM_ID)-1]['songtitle'].split('-')
-            live_info = {
-                'title': stream_status[0],
-                'artist': stream_status[1],
-                'album': stream_status[2],
+            
+            try:
+                title = stream_status[0]
+            except IndexError:
+                title = 'None'
+            try:
+                artist = stream_status[1]
+            except IndexError:
+                title = 'None'
+            try:
+                album = stream_status[2]
+            except IndexError:
+                album = 'None'
+
+            return {
+                'title': title,
+                'artist': artist,
+                'album': album,
                 'art_url': ART_URL,
                 'stream_url': STREAM_URL,
                 'info_url': STATS_URL
             }
 
-            return live_info
-
     except Exception as e:
-        print(e)
+        print('error getting live_info: %s' % str(e))
 
-    return stream_status
+    return None
