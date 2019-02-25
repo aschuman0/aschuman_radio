@@ -28,5 +28,5 @@ appengine_config.py
 .gcloudignore
 
 # IDE things
-.vscode/
+.vscode/*
 .idea/
