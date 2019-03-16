@@ -11,8 +11,7 @@ SERVER_PORT = '8000'
 STREAM_ID = '2'
 STATS_ENDPOINT = '/statistics?json=1'
 ART_ENDPOINT = '/playingart?sid=' + STREAM_ID
-STREAM_ENDPOINT = '/;?type=http&sid=' + STREAM_ID
-
+STREAM_ENDPOINT = '/' + STREAM_ID + ';'
 
 ENDPOINT_TEMPLATE = 'http://{ip}:{port}{endpoint}'
 STATS_URL = ENDPOINT_TEMPLATE.format(ip=SERVER_IP,
