@@ -40,7 +40,7 @@ def get_live_info():
             try:
                 artist = stream_status[1]
             except IndexError:
-                title = 'None'
+                artist = 'None'
             try:
                 album = stream_status[2]
             except IndexError:
