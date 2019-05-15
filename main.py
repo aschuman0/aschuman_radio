@@ -12,10 +12,19 @@ shows = get_shows()
 def index():
     if get_live_info():
         live_info = get_live_info()
-        return render_template(
-            'live.html',
-            live_info=live_info,
-            show=shows[0].to_dict()
+        newest_show = shows[0]
+
+        if newest_show.embed_code:
+            return render_template(
+                'embed_live.html',
+                live_info=live_info,
+                show=newest_show.to_dict()
+            )
+        elif newest_show.playlist:
+            return render_template(
+                'live.html',
+                live_info=live_info,
+                show=newest_show.to_dict()
             )
 
     return render_template('index.html', shows=shows)
@@ -33,9 +42,14 @@ def show_listing():
 def show(slug):
     show = get_show_from_slug(shows=shows, slug=slug)
     if show:
-        return render_template(
-            'show.html', show=show.to_dict()
-            )
+        if show.playlist:
+                return render_template(
+                'show.html', show=show.to_dict()
+                )
+        elif show.embed_code:
+                return render_template(
+                'embed_show.html', show=show.to_dict()
+                )
     else:
         abort(404)
 

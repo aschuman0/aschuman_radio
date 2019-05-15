@@ -13,10 +13,12 @@ class Show():
         self.show_date = None
         self.show_creation = None
         self.title = None
-        self.decription = None
+        self.description = None
         self.show_type = None
         self.playlist_path = None
         self.playlist = None
+        self.embed_url = None
+        self.embed_code = None
         self.slug = show_file_path.split('.')[0]
 
         self._show_from_file()
@@ -37,6 +39,22 @@ class Show():
 
         return songs
 
+    def _make_embed_code(self):
+        embed_width = 600
+        embed_height = 600
+        embed_frame_border = 0
+        embed_template = '<iframe src="{url}" width="{width}" \
+                height="{height}" frameborder="{frame_border}" \
+                allowtransparency="true" allow="encrypted-media">\
+                    </iframe>'.format(
+                        url=self.embed_url,
+                        height=embed_height,
+                        width=embed_width,
+                        frame_border=embed_frame_border
+                    )
+
+        return embed_template
+
     def _show_from_file(self):
         with open(self.show_file_path, 'rU') as f:
             show_dict = json.load(f)
@@ -46,21 +64,27 @@ class Show():
             )
             self.show_creation = self.show_date  # same value for now
             self.title = show_dict.get('title')
-            self.decription = show_dict.get('description')
+            self.description = show_dict.get('description')
             self.show_type = show_dict.get('show_type')
             self.playlist_path = show_dict.get('playlist')
+            self.embed_url = show_dict.get('embed_url')
 
-        self.playlist = self._playlist_dict_from_file(self.playlist_path)
+        if self.embed_url:
+            self.embed_code = self._make_embed_code()
+        if self.playlist:
+            self.playlist = self._playlist_dict_from_file(self.playlist_path)
 
     def to_dict(self):
         return {
             'show_date': self.show_date,
             'show_creation': self.show_creation,
             'title': self.title,
-            'description': self.decription,
+            'description': self.description,
             'show_type': self.show_type,
             'playlist': self.playlist,
-            'slug': self.slug
+            'slug': self.slug,
+            'embed_url': self.embed_url,
+            'embed_code': self.embed_code
         }
 
 
