@@ -71,7 +71,7 @@ class Show():
 
         if self.embed_url:
             self.embed_code = self._make_embed_code()
-        if self.playlist:
+        if self.playlist_path:
             self.playlist = self._playlist_dict_from_file(self.playlist_path)
 
     def to_dict(self):
