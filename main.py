@@ -43,13 +43,13 @@ def show(slug):
     show = get_show_from_slug(shows=shows, slug=slug)
     if show:
         if show.playlist:
-                return render_template(
+            return render_template(
                 'show.html', show=show.to_dict()
-                )
+            )
         elif show.embed_code:
-                return render_template(
+            return render_template(
                 'embed_show.html', show=show.to_dict()
-                )
+            )
     else:
         abort(404)
 
