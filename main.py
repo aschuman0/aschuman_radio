@@ -39,7 +39,7 @@ def show(slug):
         if newest_show.slug == slug:
             live_info = get_live_info()
             return render_template(
-                'live_show.html',
+                'show_live.html',
                 show=show.to_dict(),
                 live_info=live_info
             )
