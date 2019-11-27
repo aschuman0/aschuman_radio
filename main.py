@@ -13,21 +13,14 @@ def index():
     if get_live_info():
         live_info = get_live_info()
         newest_show = shows[0]
-
         if newest_show.embed_code:
             return render_template(
-                'embed_live.html',
-                live_info=live_info,
-                show=newest_show.to_dict()
-            )
-        elif newest_show.playlist:
-            return render_template(
-                'live.html',
+                'index_live.html',
                 live_info=live_info,
                 show=newest_show.to_dict()
             )
 
-    return render_template('index.html', shows=shows)
+    return render_template('index.html')
 
 
 @app.route('/shows', methods=['GET'])
@@ -41,14 +34,19 @@ def show_listing():
 @app.route('/shows/<slug>', methods=['GET'])
 def show(slug):
     show = get_show_from_slug(shows=shows, slug=slug)
+    newest_show = shows[0]
     if show:
-        if show.playlist:
+        if newest_show.slug == slug:
+            live_info = get_live_info()
             return render_template(
-                'show.html', show=show.to_dict()
+                'live_show.html',
+                show=show.to_dict(),
+                live_info=live_info
             )
-        elif show.embed_code:
+        else:
             return render_template(
-                'embed_show.html', show=show.to_dict()
+                'show.html',
+                show=show.to_dict(),
             )
     else:
         abort(404)
