@@ -1,10 +1,6 @@
 {% extends "base.html" %}
-{% import "live_player.html" as live_player %}
 {% block content %}
-{% if live_info %}
-    {{ live_player }}
-{% else %}
+{{ super() }}
     <p>We generally broadcast from 8-9pm Eastern (midnight UTC) on Tuesdays.</p>
     <p>Tune in for an hour long selection of modern classical, ambient, various electronics,<br />post-rock and whatever else we're listening to this week.</p>
-{% endif %}
 {% endblock %}
