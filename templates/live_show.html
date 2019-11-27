@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>{{ show.title }}<h1>
+    {{ nav }}
+    {% if live_info %}
+    <h2>we are live!</h2>
+    <!-- this needs to be replaced with live updating js -->
+    <!--<p><img src="{{ live_info.art_url }}" height="85" width="85"/><br />Now Playing:<br /><strong>{{ live_info.title }}</strong> - {{ live_info.artist }} - {{ live_info.album }}</p> -->
+    <!--<audio controls src="{{ live_info.stream_url }}" type="audio/mp3"></audio> -->
+    <audio controls preload="none" style="width:16em;padding:0;"><source src="{{ live_info.stream_url }}"></source></audio>
+    </audio>
+    {% endif %}
+    <p>{{ show.description }}</p>
+    <br />
+    {{ show.embed_code|safe }}
+    <p>Aired on {{ show.show_date.strftime('%B %d, %Y') }}</p>
+{% endblock %}
