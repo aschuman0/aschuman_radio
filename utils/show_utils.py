@@ -6,6 +6,7 @@ from csv import DictReader
 SHOW_DIR = 'static/shows/'
 PLAYLIST_DIR = 'static/playlists/'
 
+
 class Show():
     def __init__(self, show_file_path):
         self.datestring_format = '%Y-%m-%d'
