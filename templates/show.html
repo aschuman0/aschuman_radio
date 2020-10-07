@@ -4,6 +4,25 @@
     {{ nav }}
     <p>{{ show.description }}</p>
     <br />
-    {{ show.embed_code|safe }}
+    {% if show.embed_code %}
+        {{ show.embed_code|safe }}
+    {% endif %}
+    {% if show.playlist %}
+        <table>
+        <tr>
+            <th>Title</th>
+            <th>Artist</th>
+            <th>Album</th>
+            <th>Genre</th>
+        </tr>
+        {% for song in show.playlist %}
+        <tr>
+            <td><b>{{song.name}}</b></td>
+            <td>{{song.artist}}</td>
+            <td>{{song.album}}</td>
+            <td>{{song.genre}}</td>
+        </tr>
+        {% endfor %}
+    {% endif %}
     <p>Aired on {{ show.show_date.strftime('%B %d, %Y') }}</p>
 {% endblock %}
