@@ -13,12 +13,11 @@ def index():
     if get_live_info():
         live_info = get_live_info()
         newest_show = shows[0]
-        if newest_show.embed_code:
-            return render_template(
-                'index_live.html',
-                live_info=live_info,
-                show=newest_show.to_dict()
-            )
+        return render_template(
+            'index_live.html',
+            live_info=live_info,
+            show=newest_show.to_dict()
+        )
 
     return render_template('index.html')
 
