@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "/Users/aschuman/.virtualenvs/aaron-radio/bin/python",
+    "python.pythonPath": "/Users/aschuman/.virtualenvs/aschuman-radio/bin/python",
     "files.exclude": {
         "**/.git": true,
         "**/.svn": true,
