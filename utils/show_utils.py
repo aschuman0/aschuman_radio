@@ -20,6 +20,7 @@ class Show():
         self.playlist = None
         self.embed_url = None
         self.embed_code = None
+        self.am_embed = None
         self.slug = show_file_path.split('.')[0]
 
         self._show_from_file()
@@ -56,6 +57,12 @@ class Show():
 
         return embed_template
 
+    def _make_am_embed(self):
+        embed_width = 600
+        embed_height = 600
+        embed_frame_border = 0
+        return f'<iframe allow="autoplay *; encrypted-media *; fullscreen *" frameborder="{embed_frame_border}" height="{embed_height}" style="width:100%;max-width:{embed_width}px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="{self.am_embed}"></iframe>'
+
     def _show_from_file(self):
         with open(self.show_file_path, 'rU') as f:
             show_dict = json.load(f)
@@ -69,9 +76,12 @@ class Show():
             self.show_type = show_dict.get('show_type')
             self.playlist_path = show_dict.get('playlist')
             self.embed_url = show_dict.get('embed_url')
+            self.am_embed = show_dict.get('am_embed')
 
         if self.embed_url:
             self.embed_code = self._make_embed_code()
+        if self.am_embed:
+            self.embed_code = self._make_am_embed()
         if self.playlist_path:
             self.playlist = self._playlist_dict_from_file(self.playlist_path)
 
@@ -85,7 +95,7 @@ class Show():
             'playlist': self.playlist,
             'slug': self.slug,
             'embed_url': self.embed_url,
-            'embed_code': self.embed_code
+            'embed_code': self.embed_code,
         }
 
 
